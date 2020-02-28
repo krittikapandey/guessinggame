@@ -5,9 +5,15 @@ function guess()
 echo "Guess how many number of files exist in current directory"
 read response
 total_number_files=$(ls -1A | wc -l)
+if ! [[ $response =~ ^[0-9]$ ]];
+                then 
+                        echo "Please guess the number in Integer format only"
+#			echo $response
+			guess
+
+else
 while [ $total_number_files -ne $response ];
 do
-		#let num_of_files=$((ls && ls -d .!(|.)) | wc -l)
 		if [[ $response -lt $total_number_files ]];
 		then  
 			echo "Provided number is less than actual number of files in directory. Please try again" 
@@ -19,9 +25,7 @@ do
 			guess
 		fi
 done
-#else
-#echo "you input wrong. Please guess the input in integer format" 
-#fi
+fi
 }
 
 guess
